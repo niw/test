@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Show environment
       run: |
-        make show_envrionment
+        make show_environment
     - name: Nyan
       run: |
         make nyan
