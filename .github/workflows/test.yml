@@ -1,23 +1,23 @@
 name: test
 
 on:
-- push
-- pull_request
+  - push
+  - pull_request
 
 jobs:
   nyan:
     runs-on: macOS-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Xcode 12
-      run: |
-        sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
-    - name: Show environment
-      run: |
-        make show_environment
-    - name: Nyan
-      run: |
-        make nyan
-    - name: SwiftPackageTest test
-      run: |
-        make swift_package_test_test
+      - uses: actions/checkout@v2
+      - name: Use Xcode 12
+        run: |
+          sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
+      - name: Show environment
+        run: |
+          make show_environment
+      - name: Nyan
+        run: |
+          make nyan
+      - name: SwiftPackageTest test
+        run: |
+          make swift_package_test_test
