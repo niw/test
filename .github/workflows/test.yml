@@ -8,6 +8,10 @@ jobs:
   nyan:
     runs-on: macOS-latest
     steps:
+    - name: Where am I
+      run: |
+        pwd
+        ls -al
     - name: Show environment
       run: |
         make show_environment
