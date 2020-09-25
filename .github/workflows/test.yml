@@ -8,11 +8,10 @@ jobs:
   nyan:
     runs-on: macOS-latest
     steps:
-    - name: Where am I
-      run: |
-        pwd
-        ls -al
     - uses: actions/checkout@v2
+    - name: Use Xcode 12
+      run: |
+        sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
     - name: Show environment
       run: |
         make show_environment
