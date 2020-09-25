@@ -19,3 +19,6 @@ jobs:
     - name: Nyan
       run: |
         make nyan
+    - name: SwiftPackageTest test
+      run: |
+        make swift_package_test_test
