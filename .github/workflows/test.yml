@@ -12,6 +12,7 @@ jobs:
       run: |
         pwd
         ls -al
+    - uses: actions/checkout@v2
     - name: Show environment
       run: |
         make show_environment
