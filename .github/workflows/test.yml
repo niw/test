@@ -9,8 +9,8 @@ jobs:
     runs-on: macOS-latest
     steps:
     - name: Show environment
-      runs: |
+      run: |
         make show_envrionment
     - name: Nyan
-      runs:
+      run: |
         make nyan
