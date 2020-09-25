@@ -1,0 +1,16 @@
+name: test
+
+on:
+- push
+- pull_request
+
+jobs:
+  nyan:
+    runs-on: macOS-latest
+    steps:
+    - name: Show environment
+      runs: |
+        make show_envrionment
+    - name: Nyan
+      runs:
+        make nyan
