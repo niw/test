@@ -38,6 +38,10 @@ jobs:
         run: |
           make bundle
 
+      - name: Docs
+        run: |
+          make docs
+
       - name: Copy
         run: |
           rsync -n -av8 --exclude .git --delete .build/documentation/ .gh-pages/
