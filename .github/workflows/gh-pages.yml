@@ -1,0 +1,35 @@
+name: gh-pages
+
+on:
+  - push
+
+jobs:
+  gen_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v2
+
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          path: .gh-pages
+
+      - name: Docs
+        run: |
+          make docs
+
+      - name: Copy
+        run: |
+          rsync -n -av8 --exclude .git --delete .build/documentation/ .gh-pages/
+
+      - name: Push
+        run: |
+          cd ${GITHUB_WORKSPACE}/.gh-pages
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          if git commit -m "generated"; then
+            git push
+          fi

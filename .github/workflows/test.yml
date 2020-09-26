@@ -1,0 +1,35 @@
+name: test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Xcode 12
+        run: |
+          sudo xcode-select -s /Applications/Xcode_12.app/Contents/Developer
+      - name: Show versions
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+      - name: Cache bundle
+        uses: actions/cache@v2
+        env:
+          cache-name: bundle
+        with:
+          path: .bundle
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('Gemfile.lock') }}
+      - name: Bundle
+        run: |
+          make bundle
+      - name: Lint
+        run: |
+          make lint
+      - name: Test
+        run: |
+          make test

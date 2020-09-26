@@ -1,0 +1,9 @@
+.DS_Store
+/*.xcodeproj
+/.build
+/.bundle
+/.gh-pages
+/.swiftpm
+/Packages
+/build
+xcuserdata/
