@@ -5,7 +5,7 @@ on:
 
 jobs:
   gen_docs:
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
     steps:
       - name: Checkout default branch
         uses: actions/checkout@v2
@@ -15,6 +15,14 @@ jobs:
         with:
           ref: gh-pages
           path: .gh-pages
+
+      - name: Cache bundle
+        uses: actions/cache@v2
+        env:
+          cache-name: bundle
+        with:
+          path: .bundle
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('Gemfile.lock') }}
 
       - name: Docs
         run: |
