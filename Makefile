@@ -1,15 +1,32 @@
-.PHONY: show_environment
-show_environment:
-	sw_vers
-	xcodebuild -version
-	swift --version
+RUBY_BIN_PATH = /usr/bin
+RUBY = $(RUBY_BIN_PATH)/ruby
+BUNDLE = $(RUBY_BIN_PATH)/bundle
 
-.PHONY: nyan
-nyan:
-	echo nyan
+.PHONY: all
+all: correct
 
-.PHONY: swift_package_test_test
-swift_package_test_test:
+.PHONY: clean
+clean:
+	git clean -dfX
+
+.bundle:
+	$(BUNDLE) install --path "$@"
+
+.PHONY: lint
+lint: .bundle
+	$(BUNDLE) exec rubocop
+
+.PHONY: test
+test:
 	cd SwiftPackageTest \
 	&& swift package generate-xcodeproj \
-	&& xcodebuild -scheme SwiftPackageTest-Package -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=14.0' test
+	&& xcodebuild \
+	-project SwiftPackageTest.xcodeproj \
+	-scheme SwiftPackageTest-Package \
+	-destination 'platform=iOS Simulator,name=iPhone 11' \
+	test
+
+.PHONY: docs
+docs:
+	mkdir -p .docs
+	date > .docs/index.html

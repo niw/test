@@ -7,7 +7,7 @@ on:
 
 jobs:
   gen_docs:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout default branch
         uses: actions/checkout@v2
@@ -20,7 +20,7 @@ jobs:
 
       - name: Generate docs
         run: |
-          date > ${GITHUB_WORKSPACE}/.docs/index.html
+          make docs
 
       - name: Push
         run: |
