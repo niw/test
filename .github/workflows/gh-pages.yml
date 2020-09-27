@@ -44,7 +44,7 @@ jobs:
 
       - name: Copy
         run: |
-          rsync -n -av8 --exclude .git --delete .build/documentation/ .gh-pages/
+          rsync -av8 --exclude .git --delete .build/documentation/ .gh-pages/
 
       - name: Push
         run: |
