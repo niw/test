@@ -1,4 +1,4 @@
-name: github-pages-documentation
+name: update-github-pages
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - swift_package_project_test
 
 jobs:
-  github-pages-documentation:
+  update-github-pages:
     runs-on: macOS-latest
 
     env:
@@ -44,11 +44,11 @@ jobs:
         run: |
           make bundle
 
-      - name: Update documentation
+      - name: Update GitHub Pages
         run: |
           make ghpages
 
-      - name: Commit documentation
+      - name: Commit changes
         run: |
           cd ${GITHUB_WORKSPACE}/.gh-pages
           git config user.name github-actions
