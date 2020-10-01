@@ -1,11 +1,11 @@
-name: commit-check
+name: check-commit
 
 on:
   - push
   - pull_request
 
 jobs:
-  commit-check:
+  check-commit:
     runs-on: macOS-latest
 
     steps:
@@ -35,10 +35,10 @@ jobs:
         run: |
           make bundle
 
-      - name: Run Lint
+      - name: Run lint
         run: |
           make lint
 
-      - name: Run Test
+      - name: Run test
         run: |
           make test
