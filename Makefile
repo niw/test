@@ -10,8 +10,8 @@ BUILD_DERIVED_DATA_PATH = .build/derived_data
 # for commonly available destinations.
 TEST_DESTINATION = platform=iOS Simulator,name=iPhone 11
 
-DOCUMENTATION_SOURCE_FILES = Sources/**/*
-DOCUMENTATION_SUPPLIMENT_FILES = Resources/Documentation/**/*
+DOCUMENTATION_SOURCE_FILES = Sources/*/*.swift
+DOCUMENTATION_SUPPLIMENT_FILES = Resources/Documentation/*
 DOCUMENTATION_OUTPUT_PATH = .build/documentation
 
 GITHUB_PAGES_PATH ?= .gh-pages
