@@ -1,11 +1,17 @@
-name: gh-pages
+name: github-pages-documentation
 
 on:
-  - push
+  push:
+    branches:
+      - swift_package_project_test
 
 jobs:
-  gen_docs:
+  github-pages-documentation:
     runs-on: macOS-latest
+
+    env:
+      GITHUB_PAGES_PATH: .gh-pages
+
     steps:
       - name: Use Xcode 12
         run: |
@@ -24,7 +30,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: gh-pages
-          path: .gh-pages
+          path: ${{ env.GITHUB_PAGES_PATH }}
 
       - name: Cache bundle
         uses: actions/cache@v2
@@ -34,17 +40,13 @@ jobs:
           path: .bundle
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('Gemfile.lock') }}
 
-      - name: Bundle
+      - name: Update bundle
         run: |
           make bundle
 
-      - name: Docs
+      - name: Update documentation
         run: |
-          make docs
-
-      - name: Copy
-        run: |
-          rsync -av8 --exclude .git --delete .build/documentation/ .gh-pages/
+          make ghpages
 
       - name: Push
         run: |
